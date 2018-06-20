@@ -1,0 +1,19 @@
+{
+  "name": "taqtile-cordova-plugin-deeplinks",
+  "version": "0.1.0",
+  "description": "",
+  "cordova": {
+    "id": "taqtile-cordova-plugin-deeplinks",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android"
+  ],
+  "author": "Lobach",
+  "license": "ISC"
+}
