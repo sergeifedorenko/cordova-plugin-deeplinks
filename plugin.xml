@@ -1,2 +1,33 @@
-<?xml version='1.0' encoding='utf-8'?>
-<plugin id="taqtile-cordova-plugin-deeplinks" version="0.1.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android"><name>DeeplinkWrapper</name><js-module name="DeeplinkWrapper" src="www/DeeplinkWrapper.js"><clobbers target="cordova.plugins.DeeplinkWrapper" /></js-module><platform name="ios"><config-file parent="/*" target="config.xml"><feature name="DeeplinkWrapper"><param name="ios-package" value="DeeplinkWrapper" /></feature></config-file><source-file src="src/ios/DeeplinkWrapper.m" /></platform><platform name="android"><config-file parent="/*" target="res/xml/config.xml"><feature name="DeeplinkWrapper"><param name="android-package" value="taqtile-cordova-plugin-deeplinks.DeeplinkWrapper" /></feature></config-file><config-file parent="/*" target="AndroidManifest.xml"></config-file><source-file src="src/android/DeeplinkWrapper.java" target-dir="src/taqtile-cordova-plugin-deeplinks/DeeplinkWrapper" /></platform></plugin>
+<?xml version="1.0" encoding="utf-8"?>
+<plugin id="taqtile-cordova-plugin-deeplinks" version="0.1.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+	<name>
+		DeeplinkWrapper
+	</name>
+	<js-module name="DeeplinkWrapper" src="www/DeeplinkWrapper.js">
+		<clobbers target="cordova.plugins.DeeplinkWrapper" />
+	</js-module>
+	<platform name="ios">
+		<config-file parent="/*" target="config.xml">
+			<feature name="DeeplinkWrapper">
+				<param name="ios-package" value="DeeplinkWrapper" />
+			</feature>
+		</config-file>
+		<source-file src="src/ios/DeeplinkWrapper.m" />
+	</platform>
+	<platform name="android">
+		<config-file parent="/*" target="res/xml/config.xml">
+			<feature name="DeeplinkWrapper">
+				<param name="android-package" value="taqtile-cordova-plugin-deeplinks.DeeplinkWrapper" />
+			</feature>
+		</config-file>
+		<config-file parent="/*" target="AndroidManifest.xml">
+			<intent-filter android:label="@string/filter_view_dgapp_home">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="dgapp" android:host="home" />
+			</intent-filter>
+		</config-file>
+		<source-file src="src/android/DeeplinkWrapper.java" target-dir="src/taqtile-cordova-plugin-deeplinks/DeeplinkWrapper" />
+	</platform>
+</plugin>
