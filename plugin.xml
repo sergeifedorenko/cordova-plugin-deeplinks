@@ -21,7 +21,7 @@
 			</feature>
 		</config-file>
 		<config-file parent="/*" target="AndroidManifest.xml">
-			<intent-filter android:label="@string/filter_view_dgapp_home">
+			<intent-filter android:label="dgapp://home">
 				<action android:name="android.intent.action.VIEW" />
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
