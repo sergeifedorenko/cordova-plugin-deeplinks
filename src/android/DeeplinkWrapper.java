@@ -6,6 +6,8 @@ import org.apache.cordova.CallbackContext;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import android.content.Intent;
+import android.net.Uri;
 
 /**
  * This class echoes a string called from JavaScript.
@@ -23,7 +25,13 @@ public class DeeplinkWrapper extends CordovaPlugin {
         return false;
     }
 
-   private void coolMethod(String message, CallbackContext callbackContext) {
+    public String getIntent(){
+        Intent intent = cordova.getActivity().getIntent();
+        Uri data = intent.getData();
+        return Uri.getEncodedPath();
+    }
+
+    private void coolMethod(String message, CallbackContext callbackContext) {
         if (message != null && message.length() > 0) {
             callbackContext.success(message);
         } else {
