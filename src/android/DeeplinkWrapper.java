@@ -25,7 +25,7 @@ public class DeeplinkWrapper extends CordovaPlugin {
         return false;
     }
 
-    public String getIntent(){
+    public String getUriFromIntent(){
         Intent intent = cordova.getActivity().getIntent();
         Uri data = intent.getData();
         return Uri.getEncodedPath();
