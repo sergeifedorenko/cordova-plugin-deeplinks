@@ -14,6 +14,18 @@ DeeplinkWrapper.prototype.getCordovaURIFRomIntent = function(successCallback, fa
     );
 };
 
+DeeplinkWrapper.prototype.coolMethod = function(arg0, successCallback, failureCallback) {
+    'use strict';
+
+    return cordova.exec (
+        successCallback,
+        failureCallback,
+        "DeeplinkWrapper",
+        'coolMethod',
+        [arg0]
+    );
+};
+
 
 var deepLinks = new DeeplinkWrapper();
 module.exports = deepLinks;
