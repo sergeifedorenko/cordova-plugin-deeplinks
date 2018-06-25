@@ -1,13 +1,13 @@
-package taqtile-cordova-plugin-deeplinks;
-
+package deeplinks;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
-
+import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.content.Intent;
 import android.net.Uri;
+
 
 /**
  * This class echoes a string called from JavaScript.
@@ -22,13 +22,22 @@ public class DeeplinkWrapper extends CordovaPlugin {
             this.coolMethod(message, callbackContext);
             return true;
         }
+        if (action.equals("getUriFromIntent")) {
+            this.getUriFromIntent(callbackContext);
+            return true;
+        }
+
+
         return false;
     }
 
-    public String getUriFromIntent(){
+    private void getUriFromIntent (final CallbackContext context) {
+        String resultUri = null;
         Intent intent = cordova.getActivity().getIntent();
-        Uri data = intent.getData();
-        return Uri.getEncodedPath();
+        Uri uri = intent.getData();
+            if(uri!=null)
+                resultUri = uri.toString();
+        context.sendPluginResult(new PluginResult(PluginResult.Status.OK, resultUri));
     }
 
     private void coolMethod(String message, CallbackContext callbackContext) {

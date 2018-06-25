@@ -36,11 +36,11 @@
 	<platform name="android">
 		<config-file parent="/*" target="res/xml/config.xml">
 			<feature name="DeeplinkWrapper">
-				<param name="android-package" value="taqtile-cordova-plugin-deeplinks.DeeplinkWrapper" />
+				<param name="android-package" value="deeplinks.DeeplinkWrapper" />
 			</feature>
 		</config-file>
 
-		<config-file parent="/*" target="AndroidManifest.xml">
+		<config-file parent="application/activity" target="AndroidManifest.xml">
 			<intent-filter android:label="dgapp://home">
 				<action android:name="android.intent.action.VIEW" />
 				<category android:name="android.intent.category.DEFAULT" />
@@ -48,7 +48,6 @@
 				<data android:scheme="dgapp" android:host="home" />
 			</intent-filter>
 		</config-file>
-    
-		<source-file src="src/android/DeeplinkWrapper.java" target-dir="src/taqtile-cordova-plugin-deeplinks/DeeplinkWrapper" />
+		<source-file src="src/android/DeeplinkWrapper.java" target-dir="src/deeplinks" />
 	</platform>
 </plugin>
