@@ -16,18 +16,33 @@
         })
     };
 
-    DeeplinkWrapper.prototype.coolMethod = function(arg0, successCallback, failureCallback) {
+    DeeplinkWrapper.prototype.getDeeplink = function(successCallback, failureCallback) {
         'use strict';
 
-        return cordova.exec (
-            successCallback,
-            failureCallback,
-            "DeeplinkWrapper",
-            'coolMethod',
-            [arg0]
-        );
+        return new Promise(function(resolve, reject) {
+            cordova.exec (
+                resolve,
+                reject,
+                "DeeplinkWrapper",
+                "getDeeplink",
+                []
+            );
+        })
     };
+    
+    DeeplinkWrapper.prototype.onDeepLink = function(successCallback, failureCallback) {
+        'use strict';
 
+        return new Promise(function(resolve, reject) {
+            cordova.exec (
+                resolve,
+                reject,
+                "DeeplinkWrapper",
+                "onDeepLink",
+                []
+            );
+        })
+    };
 
     var deepLinks = new DeeplinkWrapper();
     module.exports = deepLinks;
