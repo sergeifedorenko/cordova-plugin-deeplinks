@@ -13,9 +13,7 @@ static NSString *const PLUGIN_NAME = @"DeeplinkPlugin";
         return NO;
     }
     
-    BOOL handled = [plugin setDeeplinkUrl:url];
-    
-    return YES;
+    return [plugin setDeeplinkUrl:url];
 }
 
 @end
