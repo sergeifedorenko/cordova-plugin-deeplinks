@@ -1,57 +1,18 @@
-    function DeeplinkWrapper() {
-        'use strict';
-    }
+var exec = require('cordova/exec');
+var PLUGIN_NAME = 'DeeplinkPlugin';
 
-    DeeplinkWrapper.prototype.getCordovaURIFRomIntent = function(successCallback, failureCallback) {
-        'use strict';
-
+var DeeplinkPlugin = {
+    getDeeplink: function() {
         return new Promise(function(resolve, reject) {
-            cordova.exec (
-                resolve,
-                reject,
-                "DeeplinkWrapper",
-                "getUriFromIntent",
-                []
-            );
+            exec (resolve, reject, PLUGIN_NAME, "getDeeplink", []);
         })
-    };
+    },
 
-    DeeplinkWrapper.prototype.getDeeplink = function(successCallback, failureCallback) {
-        'use strict';
-
-        return new Promise(function(resolve, reject) {
-            cordova.exec (
-                resolve,
-                reject,
-                "DeeplinkWrapper",
-                "getDeeplink",
-                []
-            );
-        })
-    };
-    
-    DeeplinkWrapper.prototype.onDeepLink = function(successCallback, failureCallback) {
-        'use strict';
-
-        return new Promise(function(resolve, reject) {
-            cordova.exec (
-                resolve,
-                reject,
-                "DeeplinkWrapper",
-                "onDeepLink",
-                []
-            );
-        })
-    };
-
-    var deepLinks = new DeeplinkWrapper();
-    module.exports = deepLinks;
-
-// Make plugin work under window.plugins
-    if (!window.plugins) {
-        window.plugins = {};
+    onDeepLink: function(callback) {
+        return new Promise(function(resolve) {
+            exec (callback, null, PLUGIN_NAME, "onDeepLink", []);
+        }).then(callback)
     }
-    if (!window.plugins.deepLinks) {
-        window.plugins.deepLinks = deepLinks;
-    }
+};
 
+module.exports = DeeplinkPlugin;
