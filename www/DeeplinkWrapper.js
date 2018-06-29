@@ -1,7 +1,7 @@
 var exec = require('cordova/exec');
 var PLUGIN_NAME = 'DeeplinkPlugin';
 
-var DeeplinkPlugin = {
+module.exports = {
     getDeeplink: function() {
         return new Promise(function(resolve, reject) {
             exec (resolve, reject, PLUGIN_NAME, "getDeeplink", []);
@@ -14,5 +14,3 @@ var DeeplinkPlugin = {
         }).then(callback)
     }
 };
-
-module.exports = DeeplinkPlugin;
