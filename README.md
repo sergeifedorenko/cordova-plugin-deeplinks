@@ -10,5 +10,5 @@ cordova plugin add https://github.com/sergeifedorenko/cordova-plugin-deeplinks.g
 
 ## Methods
 
-- `window.geofence.getDeeplink()`
-- `window.geofence.onDeepLink(callback)`
+- `window.deeplinkPlugin.getDeeplink()`
+- `window.deeplinkPlugin.onDeepLink(callback)`
