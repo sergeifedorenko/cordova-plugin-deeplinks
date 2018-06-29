@@ -32,11 +32,12 @@
 
 - (void) notifyAllListners {
     // Send the last event to JS if we have one
-    if (_handlers.count == 0 || deeplinkUrl != nil) {
+    if (_handlers.count == 0) {
         return;
     }
     
     CDVPluginResult *pluginResult = [self createPluginResult];
+    [pluginResult setKeepCallbackAsBool:TRUE];
     // Iterate our handlers and send the event
     for (id callbackID in _handlers) {
         [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackID];
@@ -44,7 +45,14 @@
 }
 
 - (CDVPluginResult *) createPluginResult {
-    return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:deeplinkUrl.absoluteString];
+    NSString *message = nil;
+    
+    if (deeplinkUrl) {
+        message = deeplinkUrl.absoluteString;
+    } else {
+        message = @"";
+    }
+    return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:message];
 }
 
 @end
