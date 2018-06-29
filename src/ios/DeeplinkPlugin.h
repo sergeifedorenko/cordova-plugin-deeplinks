@@ -1,14 +1,15 @@
 #import <Cordova/CDVPlugin.h>
 
 @interface DeeplinkPlugin : CDVPlugin {
-    // Handlers for URL events
     NSMutableArray *_handlers;
-    CDVPluginResult *_lastEvent;
+    NSURL *deeplinkUrl;
 }
 
-- (void)coolMethod:(CDVInvokedUrlCommand*)command;
-- (BOOL)handleLink:(NSURL *)url;
-- (void)sendToJs;
-- (CDVPluginResult*)createResult:(NSURL *)url;
+- (void) getDeeplink:(CDVInvokedUrlCommand*)command;
+- (void) onDeepLink:(CDVInvokedUrlCommand *)command;
+
+- (BOOL) setDeeplinkUrl: (NSURL *)deeplink;
+- (void) notifyAllListners;
+- (CDVPluginResult *) createPluginResult;
 
 @end

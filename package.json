@@ -1,9 +1,9 @@
 {
-  "name": "taqtile-cordova-plugin-deeplinks",
-  "version": "0.1.0",
+  "name": "cordova-plugin-deeplinks",
+  "version": "1.0.0",
   "description": "",
   "cordova": {
-    "id": "taqtile-cordova-plugin-deeplinks",
+    "id": "cordova-plugin-deeplinks",
     "platforms": [
       "ios",
       "android"

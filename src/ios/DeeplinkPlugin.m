@@ -4,63 +4,55 @@
 
 @implementation DeeplinkPlugin
 
-- (void)pluginInitialize {
+- (void)pluginInitialize
+{
     _handlers = [[NSMutableArray alloc] init];
 }
 
-- (void)coolMethod:(CDVInvokedUrlCommand*)command
+- (void)getDeeplink:(CDVInvokedUrlCommand*)command
 {
-    CDVPluginResult* pluginResult = nil;
-    NSString* echo = [command.arguments objectAtIndex:0];
-
-    if (echo != nil && [echo length] > 0) {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:echo];
-    } else {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-    }
-
+    CDVPluginResult *pluginResult = [self createPluginResult];
+    
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
-- (BOOL)handleLink:(NSURL *)url {
-    NSLog(@"IonicDeepLinkPlugin: Handle link (internal) %@", url);
+- (void)onDeepLink:(CDVInvokedUrlCommand *)command {
+    [_handlers addObject:command.callbackId];
     
-    _lastEvent = [self createResult:url];
-    
-    [self sendToJs];
-    
-    return YES;
+    [self notifyAllListners];
 }
 
-- (void) sendToJs {
+- (BOOL)setDeeplinkUrl: (NSURL *)deeplink
+{
+    deeplinkUrl = deeplink;
+    [self notifyAllListners];
+    
+    return TRUE;
+}
+
+- (void) notifyAllListners {
     // Send the last event to JS if we have one
-    if (_handlers.count == 0 || _lastEvent == nil) {
+    if (_handlers.count == 0) {
         return;
     }
     
+    CDVPluginResult *pluginResult = [self createPluginResult];
+    [pluginResult setKeepCallbackAsBool:TRUE];
     // Iterate our handlers and send the event
-    // for (id callbackID in _handlers) {
-    //     [self.commandDelegate sendPluginResult:_lastEvent callbackId:callbackID];
-    // }
-    
-    // Clear out the last event
-    _lastEvent = nil;
+    for (id callbackID in _handlers) {
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackID];
+    }
 }
 
-- (CDVPluginResult *)createResult:(NSURL *)url {
-    NSDictionary* data = @{
-                           @"url": [url absoluteString] ?: @"",
-                           @"path": [url path] ?: @"",
-                           @"queryString": [url query] ?: @"",
-                           @"scheme": [url scheme] ?: @"",
-                           @"host": [url host] ?: @"",
-                           @"fragment": [url fragment] ?: @""
-                           };
+- (CDVPluginResult *) createPluginResult {
+    NSString *message = nil;
     
-    CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:data];
-    [result setKeepCallbackAsBool:YES];
-    return result;
+    if (deeplinkUrl) {
+        message = deeplinkUrl.absoluteString;
+    } else {
+        message = @"";
+    }
+    return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:message];
 }
-
 
 @end
